@@ -1,5 +1,6 @@
 html, body {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    min-height: 100vh;
 }
 
 h1 {
@@ -7,3 +8,9 @@ h1 {
     padding-top: 50px;
     padding-bottom: 20px;
 }
+
+#task_container {
+    min-height: calc(100vh - 255px);
+}
+
+
