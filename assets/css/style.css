@@ -1,0 +1,9 @@
+html, body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+h1 {
+    font-weight: bold;
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
