@@ -1,3 +1,6 @@
+// TODO: Save tasks, delete tasks
+
+
 var main_container = document.getElementById("main_container");
 var task_input = document.getElementById("task_input");
 var submit_button = document.getElementById("submit_button");

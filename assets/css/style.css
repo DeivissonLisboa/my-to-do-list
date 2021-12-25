@@ -11,6 +11,7 @@ h1 {
 
 #task_container {
     min-height: calc(100vh - 255px);
+    word-wrap: anywhere;
 }
 
 
