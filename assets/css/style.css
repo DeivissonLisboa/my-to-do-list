@@ -9,8 +9,8 @@ h1 {
     padding-bottom: 20px;
 }
 
-#task_container {
-    min-height: calc(100vh - 255px);
+#taskContainer {
+    min-height: calc(100vh - 290px);
     word-wrap: anywhere;
 }
 

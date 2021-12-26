@@ -1,10 +1,11 @@
 // TODO: Save tasks, delete tasks
+// https://code-boxx.com/create-save-files-javascript/
 
 
-var main_container = document.getElementById("main_container");
-var task_input = document.getElementById("task_input");
-var submit_button = document.getElementById("submit_button");
-var task_container = document.getElementById("task_container");
+var mainContainer = document.getElementById("mainContainer");
+var taskInput = document.getElementById("taskInput");
+var submitButton = document.getElementById("submitButton");
+var taskContainer = document.getElementById("taskContainer");
 const tasks = [
     "Get a Scholarship For University",
     "Hike Marcy (5344Ft)",
@@ -20,35 +21,44 @@ const tasks = [
     "Have my Own Company"
 ]; // https://www.bestrandoms.com/random-task
 
-task_input.placeholder = randomElem(tasks);
-var alert_status = false;
+taskInput.placeholder = randomElem(tasks);
+var alertStatus = false;
 
 
 function addTask() {
-    task = task_input.value;
+    task = taskInput.value;
 
     if (task.length == 0 || task.trim().length == 0 || document.getElementById(task)) {
-        if (!alert_status) {
-            task_container.insertAdjacentHTML("beforebegin",
+        if (!alertStatus) {
+            taskContainer.insertAdjacentHTML("beforebegin",
                 `<div id="alertt" class="alert alert-warning" role="alert">
                     Input field cannot be empty or already exists, please type a valid task!
                 </div>`
             );
         };
-        alert_status = true;
-        task_input.value = "";
+        alertStatus = true;
+        taskInput.value = "";
+        taskContainer.style.minHeight = "calc(100vh - 355px)"
     } else {
-        if (alert_status) {
-            main_container.removeChild(alertt)
-            alert_status = false
+        if (alertStatus) {
+            mainContainer.removeChild(alertt)
+            alertStatus = false
         };
-        task_container.innerHTML += `
+        taskContainer.innerHTML += `
             <div class="form-check">
                 <input id="` + task + `" class="form-check-input" type="checkbox" value="" onchange="changeHandler(this);">
                     <label id="` + task + `_child" class="form-check-label" for="flexCheckDefault">` + task + `</label>
             </div>`;
-        task_input.value = ""
-        task_input.placeholder = randomElem(tasks)
+        taskInput.value = ""
+        taskInput.placeholder = randomElem(tasks)
+        taskContainer.style.minHeight = "calc(100vh - 290px)"
+
+    }
+}
+
+function enterSubmit(event) {
+    if (event.which === 13) {
+        addTask()
     }
 }
 
@@ -68,4 +78,5 @@ function randomElem(list) {
 }
 
 
-submit_button.addEventListener("click", addTask);
+submitButton.addEventListener("click", addTask);
+taskInput; addEventListener("keypress", enterSubmit)
