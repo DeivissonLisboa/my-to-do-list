@@ -27,7 +27,7 @@ taskInput.placeholder = randomElem(PLACEHOLDERS);
 function addTask() {
     task = taskInput.value;
 
-    if (task.length == 0 || task.trim().length == 0 || document.getElementById(task)) {
+    if (task.length == 0 || task.trim().length == 0 || taskList.includes(task)) {
         if (!alertStatus) {
             taskContainer.insertAdjacentHTML("beforebegin",
                 `<div id="alertt" class="alert alert-warning" role="alert">
