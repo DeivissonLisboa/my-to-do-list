@@ -2,4 +2,5 @@
 
 A criação do [app](https://deivissonlisboa.github.io/to-do-app/) foi recomendado como desafio no curso de Introdução ao Javascript, na plataforma DIO.
 
-Algumas coisa ainda faltam ser implementadas, como um cache, para armazenas a lista do usuario ou quem sabe um sistema de login, e os alertas para tarefas em branco ou repetidas (que já não são aceitas, mas precisam dos alertas)!
+![Screenshot 2021-12-25 at 22-56-41 My To Do List](https://user-images.githubusercontent.com/81440170/147397607-ba8e2715-84da-4c45-b0fc-1ee5af599d0a.png)
+
