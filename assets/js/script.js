@@ -1,12 +1,10 @@
-// TODO: Save tasks, delete tasks
-// https://code-boxx.com/create-save-files-javascript/
-
-
 var mainContainer = document.getElementById("mainContainer");
 var taskInput = document.getElementById("taskInput");
 var submitButton = document.getElementById("submitButton");
+var alertStatus = false;
 var taskContainer = document.getElementById("taskContainer");
-const tasks = [
+var exportBtn = document.getElementById("exportBtn")
+const PLACEHOLDERS = [
     "Get a Scholarship For University",
     "Hike Marcy (5344Ft)",
     "Be in a Jacuzzi in the Snow",
@@ -20,9 +18,10 @@ const tasks = [
     "Live Abroad For at Least 6 Months",
     "Have my Own Company"
 ]; // https://www.bestrandoms.com/random-task
+var taskList = []
 
-taskInput.placeholder = randomElem(tasks);
-var alertStatus = false;
+
+taskInput.placeholder = randomElem(PLACEHOLDERS);
 
 
 function addTask() {
@@ -38,28 +37,29 @@ function addTask() {
         };
         alertStatus = true;
         taskInput.value = "";
-        taskContainer.style.minHeight = "calc(100vh - 355px)"
+        taskContainer.style.minHeight = "calc(100vh - 355px)";
     } else {
         if (alertStatus) {
-            mainContainer.removeChild(alertt)
-            alertStatus = false
+            mainContainer.removeChild(alertt);
+            alertStatus = false;
         };
         taskContainer.innerHTML += `
             <div class="form-check">
-                <input id="` + task + `" class="form-check-input" type="checkbox" value="" onchange="changeHandler(this);">
-                    <label id="` + task + `_child" class="form-check-label" for="flexCheckDefault">` + task + `</label>
+                <input id="` + taskList.length + `" class="form-check-input" type="checkbox" value="" onchange="changeHandler(this);">
+                    <label id="` + taskList.length + `_child" class="form-check-label" for="flexCheckDefault">` + task + `</label>
             </div>`;
-        taskInput.value = ""
-        taskInput.placeholder = randomElem(tasks)
-        taskContainer.style.minHeight = "calc(100vh - 290px)"
-
+        taskList.push(task);
+        taskInput.value = "";
+        taskInput.placeholder = randomElem(PLACEHOLDERS);
+        taskContainer.style.minHeight = "calc(100vh - 290px)";
     }
 }
 
+
 function enterSubmit(event) {
     if (event.which === 13) {
-        addTask()
-    }
+        addTask();
+    };
 }
 
 
@@ -78,5 +78,18 @@ function randomElem(list) {
 }
 
 
+function exportTasks() {
+    d = new Date();
+    fileName = `MyToDoList-Export_${d.getUTCDate()}-${d.getUTCMonth() + 1}-${d.getUTCFullYear()}.md`
+    exportText = "# My To Do List\n\n"
+    for (var i in taskList) {
+        exportText += ` - ${taskList[i]}\n`
+    }
+    myFile = new File([exportText], fileName, { type: "text/plain; charset=utf-8" });
+    saveAs(myFile);
+}
+
+
 submitButton.addEventListener("click", addTask);
-taskInput; addEventListener("keypress", enterSubmit)
+taskInput.addEventListener("keypress", enterSubmit)
+exportBtn.addEventListener("click", exportTasks)
