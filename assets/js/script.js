@@ -25,24 +25,24 @@ taskInput.placeholder = randomElem(PLACEHOLDERS);
 
 
 function addTask() {
-    task = taskInput.value;
+    let task = taskInput.value.trim();
 
-    if (task.length == 0 || task.trim().length == 0 || taskList.includes(task)) {
+    if (!task || !task.trim() || taskList.includes(task)) {
         if (!alertStatus) {
             taskContainer.insertAdjacentHTML("beforebegin",
-                `<div id="alertt" class="alert alert-warning" role="alert">
+                `<div id="alertField" class="alert alert-warning" role="alert">
                     Input field cannot be empty or already exists, please type a valid task!
                 </div>`
             );
-        };
+        }
         alertStatus = true;
         taskInput.value = "";
         taskContainer.style.minHeight = "calc(100vh - 355px)";
     } else {
         if (alertStatus) {
-            mainContainer.removeChild(alertt);
+            mainContainer.removeChild(alertField);
             alertStatus = false;
-        };
+        }
         taskContainer.innerHTML += `
             <div class="form-check">
                 <input id="` + taskList.length + `" class="form-check-input" type="checkbox" value="" onchange="changeHandler(this);">
@@ -59,12 +59,12 @@ function addTask() {
 function enterSubmit(event) {
     if (event.which === 13) {
         addTask();
-    };
+    }
 }
 
 
 function changeHandler(checkbox) {
-    label = document.getElementById(checkbox.id + "_child")
+    let label = document.getElementById(checkbox.id + "_child")
     if (checkbox.checked) {
         label.style.textDecoration = "line-through"
     } else {
@@ -79,13 +79,15 @@ function randomElem(list) {
 
 
 function exportTasks() {
-    d = new Date();
-    fileName = `MyToDoList-Export_${d.getUTCDate()}-${d.getUTCMonth() + 1}-${d.getUTCFullYear()}.md`
-    exportText = "# My To Do List\n\n"
-    for (var i in taskList) {
-        exportText += ` - ${taskList[i]}\n`
-    }
-    myFile = new File([exportText], fileName, { type: "text/plain; charset=utf-8" });
+    let d = new Date();
+    let fileName = `MyToDoList_Export-${d.getUTCDate()}-${d.getUTCMonth() + 1}-${d.getUTCFullYear()}.md`
+    let exportText = "# My To Do List\n\n"
+    taskList.forEach(
+        (item) => {
+            exportText += ` - ${item}\n`;
+        }
+    )
+    let myFile = new File([exportText], fileName, { type: "text/plain; charset=utf-8" });
     saveAs(myFile);
 }
 
